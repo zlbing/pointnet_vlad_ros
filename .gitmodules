@@ -1,0 +1,6 @@
+[submodule "internal_deps/gs"]
+	path = internal_deps/gs
+	url = http://git.gs-robot.com/chenkan/gs.git
+[submodule "internal_deps/link_stamp"]
+	path = internal_deps/link_stamp
+	url = http://git.gs-robot.com/common/link_stamp.git
