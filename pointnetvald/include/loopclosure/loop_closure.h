@@ -1,0 +1,8 @@
+//
+// Created by zzz on 19-1-10.
+//
+
+#ifndef POINTNETVLAD_ROS_LOOP_CLOSURE_H
+#define POINTNETVLAD_ROS_LOOP_CLOSURE_H
+
+#endif //POINTNETVLAD_ROS_LOOP_CLOSURE_H
