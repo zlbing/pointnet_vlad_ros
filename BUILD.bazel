@@ -24,7 +24,7 @@ COPTS = [
 LINK_OPTS = []
 
 cc_binary(
-    name = "pointnet_vlad",
+    name = "pointnetvlad",
     srcs = glob([
         "pointnetvlad/**/*.cc",
         "pointnetvlad/**/*.h",

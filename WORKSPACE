@@ -70,4 +70,3 @@ git_repository(
     remote = "https://github.com/google/glog.git",
     commit = "fc87161c962f11633a1bc5f278e038b05e8c8ed5",
 )
-
