@@ -2,5 +2,7 @@
 <launch>
   <param name="use_sim_time" value="true" />
   <node pkg="pointnetvlad" type="pointnetvlad" name="pointnetvlad" output="screen">
+    <param name="file_path" value="/home/zzz/work-space/benchmark_datasets/kaicheng_5" />
+    <param name="loop_similar" value="0.8" />
   </node>
 </launch>

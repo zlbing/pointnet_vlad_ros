@@ -10,7 +10,7 @@
 namespace PointnetVlad{
   class LoopClosure{
   public:
-    LoopClosure(const std::string &base_path);
+    LoopClosure(const std::string &base_path, double loop_similar);
     explicit LoopClosure(LoopClosure const &) = delete;
     void operator=(LoopClosure const &) = delete;
     std::pair<std::vector<int>, std::vector<double>> loop(int database_trajectory,
@@ -26,6 +26,7 @@ namespace PointnetVlad{
   private:
     std::shared_ptr<DataType::PointNetVladType> pn_vlad_data_ptr_;
     std::string base_file_path_;
+    double loop_similar_threshold_;
     std::shared_ptr<visualize::Visualize> visual_ptr_;
   };
 }

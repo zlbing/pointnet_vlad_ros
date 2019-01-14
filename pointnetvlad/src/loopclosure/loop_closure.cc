@@ -4,12 +4,13 @@
 #include "loopclosure/loop_closure.h"
 
 namespace PointnetVlad{
-  LoopClosure::LoopClosure(const std::string &base_path){
+  LoopClosure::LoopClosure(const std::string &base_path, double loop_similar){
     base_file_path_ = base_path;
     pn_vlad_data_ptr_ = std::make_shared<DataType::PointNetVladType>(base_file_path_);
     pn_vlad_data_ptr_->readData();
 
     visual_ptr_ = std::make_shared<visualize::Visualize>();
+    loop_similar_threshold_ = loop_similar;
   }
 
   std::pair<std::vector<int>, std::vector<double>> LoopClosure::loop(int database_trajectory, int query_trajectory){
@@ -61,9 +62,11 @@ namespace PointnetVlad{
 //      std::cout<<"[visulizeLoopClosure]loopclosure result: query=" <<query_index
 //               <<" database_index="<<database_index<<std::endl;
       visual_ptr_->addQueryPose(query_pose[query_index],"world");
-
+      if(loop_similar_vec[i] < loop_similar_threshold_){
+        continue;
+      }
       double delta = (query_pose[query_index].p - database_pose[database_index].p).norm();
-      if(delta > 10){
+      if(delta > 10 ){
         std::cout<<"[visulizeLoopClosure] wrong query"<<" database_index="<<database_index
                  <<" query_index="<<query_index<<std::endl;
         visual_ptr_->addWrongLoopLine(database_pose[database_index], query_pose[query_index], "world");
@@ -73,7 +76,7 @@ namespace PointnetVlad{
         visual_ptr_->addText(query_pose[query_index], query_index, loop_similar_vec[i], "world");
       }
       visual_ptr_->publish();
-      usleep(1000);
+      usleep(5000);
     }
     visual_ptr_->addDatabasePointCloud(database_pointcloud,database_pose,"world");
   }
