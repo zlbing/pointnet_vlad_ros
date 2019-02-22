@@ -62,6 +62,7 @@ namespace PointnetVlad {
       }
       //read pointcloud
       //pointcloud.bin  format: x, y, z
+      std::cout<<"[PointNetVladType::readData] read pointcloud"<<std::endl;
       for (size_t i = 0; i < trajectory_pose_vec_.size(); i++) {
         const auto &pose_vec = trajectory_pose_vec_[i];
         std::vector<std::vector<Eigen::Vector3f>> pose_vec_pointcloud;
@@ -92,6 +93,7 @@ namespace PointnetVlad {
 
       //read descriptor
       //descriptor.txt format:[double*256]
+      std::cout<<"[PointNetVladType::readData] read descriptor"<<std::endl;
       for (size_t i = 0; i < trajectory_pose_vec_.size(); i++) {
         std::string desc_file_path =
                 file_day_vec[i].string() + "/descriptor.txt";

@@ -17,11 +17,12 @@ int main(int argc, char **argv) {
 
   PointnetVlad::LoopClosure loop_closure(file_path,par_loop_similar);
 
-  std::pair<int,int> database_and_query = std::make_pair(1,2);
+  std::pair<int,int> database_and_query = std::make_pair(0,1);
   std::pair<std::vector<int>, std::vector<double>> result = loop_closure.loop(database_and_query.first,
                                                                               database_and_query.second);
   std::vector<int> loop_database_index = result.first;
   std::vector<double> loop_similar = result.second;
+
   loop_closure.visulizeLoopClosure(database_and_query.first,
                                    database_and_query.second,
                                    loop_database_index,
