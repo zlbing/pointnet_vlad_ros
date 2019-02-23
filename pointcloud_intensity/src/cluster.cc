@@ -1,14 +1,45 @@
 //
 // Created by zzz on 19-2-22.
 //
+#include "cluster.h"
+
 namespace GS{
-  Cluster::Cluster(){};
+  Cluster::Cluster(){
+  };
+
+  std::vector<Eigen::Vector4f> Cluster::runCluster(GS::IntensityGrid* grid,
+                           const std::vector<Eigen::Vector4f>& all_points){
+
+    std::vector<Eigen::Vector4f>selected_points;
+    std::vector<Eigen::Vector4f>result;
+
+    for(int i=0; i<grid->width_; i++){
+      for(int j=0; j<grid->height_; j++){
+        if(grid->grid_[j*grid->width_ + i].size()>20){
+//          std::cout<<"grid["<<i<<","<<j<<"]="<<grid->grid_[j*grid->width_ + i].size()<<std::endl;
+          selected_points.clear();
+          for(int k=0; k<grid->grid_[j*grid->width_ + i].size(); k++){
+            int index = grid->grid_[j*grid->width_ + i][k];
+//            std::cout<<" "<<index;
+            selected_points.emplace_back(all_points[index]);
+          }
+//          std::cout<<"\n"<<std::endl;
+          std::vector<Eigen::Vector4f> result_tmp = Otsu(selected_points);
+//          std::cout<<"result_tmp["<<i<<","<<j<<"]="<<result_tmp.size()<<std::endl;
+          result.insert(result.end(), result_tmp.begin(), result_tmp.end());
+        }
+      }
+    }
+    return result;
+  }
+
   std::vector<Eigen::Vector4f> Cluster::Otsu(std::vector<Eigen::Vector4f> points){
+//    std::cout<<"Otsu in"<<std::endl;
     const int GrayScale = 256;
     std::vector<int> intensityCount(GrayScale,0);
     std::vector<float> intensityPro(GrayScale,0);
     float threshold = 0;
-    for(int i=0; i<points.size();i++){
+    for(int i=0; i<(int)points.size();i++){
       intensityCount[static_cast<int>(points[i][3]+0.5)]++;
     }
 
@@ -38,12 +69,18 @@ namespace GS{
         threshold = i;
       }
     }
+
     std::vector<Eigen::Vector4f> result;
-    for(int i=0; i<points.size(); i++){
+
+    if(deltaMax < 5){
+      return result;
+    }
+    for(int i=0; i<(int)points.size(); i++){
       if(points[i][3]>threshold){
         result.emplace_back(points[i]);
       }
     }
+//    std::cout<<"deltaMax="<<deltaMax<<" threshold="<<threshold<<" size="<<result.size()<<std::endl;
     return result;
   }
 }

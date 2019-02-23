@@ -52,3 +52,33 @@ cc_binary(
         "@link_stamp//:build_revision",
     ],
 )
+
+cc_binary(
+    name = "intensity_test",
+    srcs = glob([
+        "pointcloud_intensity/**/*.cc",
+        "pointcloud_intensity/**/*.h",
+    ]),
+    copts = COPTS,
+    defines = [
+        # "PUBLISH_DEBUG_TOPIC"
+    ],
+    includes = [
+        "pointcloud_intensity/include",
+    ],
+    linkstatic = True,
+    stamp = 1,
+    deps = [
+        "@ceres",
+        "@com_github_eigen_eigen//:eigen",
+        "@gs//:gs",
+        "@io_bazel_rules_ros//ros:diagnostic_msgs",
+        "@io_bazel_rules_ros//ros:geometry_msgs",
+        "@io_bazel_rules_ros//ros:nav_msgs",
+        "@io_bazel_rules_ros//ros:roscpp",
+        "@io_bazel_rules_ros//ros:std_msgs",
+        "@io_bazel_rules_ros//ros:tf",
+        "@io_bazel_rules_ros//ros:visualization_msgs",
+        "@link_stamp//:build_revision",
+    ],
+)
