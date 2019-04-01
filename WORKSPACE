@@ -70,3 +70,33 @@ git_repository(
     remote = "https://github.com/google/glog.git",
     commit = "fc87161c962f11633a1bc5f278e038b05e8c8ed5",
 )
+
+local_repository(
+    name = "pcl_msgs",
+    path = "internal_deps/pcl_msgs",
+)
+
+new_http_archive(
+    name = "pcl",
+    url = "http://z.gs-robot.com/pcl/pcl-1.7.2.tar.gz",
+    sha256 = "479f84f2c658a6319b78271111251b4c2d6cf07643421b66bbc351d9bed0ae93",
+    strip_prefix = "pcl-pcl-1.7.2",
+    build_file = "build_file/pcl.BUILD",
+)
+
+new_http_archive(
+    name = "pcl_conversions",
+    url = "https://github.com/ros-perception/pcl_conversions/archive/0.2.1.tar.gz",
+    sha256 = "79c107f2513fe0aa472b8eefc0cd652f0aaacaba482945acbf23c72d7d3bf5c8",
+    strip_prefix = "pcl_conversions-0.2.1",
+    build_file = "build_file/pcl_conversions.BUILD",
+)
+
+git_repository(
+    name = "flann",
+    remote = "http://git.gs-robot.com/common/flann.git",
+    init_submodules = True,
+    commit = "c7bd423700492ebeee94e2f4d3c1e74e38c0e7dc",
+)
+
+

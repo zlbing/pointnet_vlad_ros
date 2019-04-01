@@ -80,5 +80,7 @@ cc_binary(
         "@io_bazel_rules_ros//ros:tf",
         "@io_bazel_rules_ros//ros:visualization_msgs",
         "@link_stamp//:build_revision",
+        "@pcl",
+        "@pcl_conversions",
     ],
 )

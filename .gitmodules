@@ -4,3 +4,6 @@
 [submodule "internal_deps/link_stamp"]
 	path = internal_deps/link_stamp
 	url = http://git.gs-robot.com/common/link_stamp.git
+[submodule "internal_deps/pcl_msgs"]
+	path = internal_deps/pcl_msgs
+	url = http://git.gs-robot.com/ros_common/pcl_msgs.git

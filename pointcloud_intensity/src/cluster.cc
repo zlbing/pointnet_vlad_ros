@@ -72,7 +72,7 @@ namespace GS{
 
     std::vector<Eigen::Vector4f> result;
 
-    if(deltaMax < 5){
+    if(deltaMax < 30){
       return result;
     }
     for(int i=0; i<(int)points.size(); i++){
@@ -80,7 +80,7 @@ namespace GS{
         result.emplace_back(points[i]);
       }
     }
-//    std::cout<<"deltaMax="<<deltaMax<<" threshold="<<threshold<<" size="<<result.size()<<std::endl;
+    std::cout<<"deltaMax="<<deltaMax<<" threshold="<<threshold<<" size="<<result.size()<<std::endl;
     return result;
   }
 }
